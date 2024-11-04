@@ -705,7 +705,7 @@ zookeeper-v2:
 
 
 # es-v1-cluster AWS >>>>>>>>>>>>>>>>>>>>>>>>>>>>
-elasticsearch-data:
+elasticsearch-data-v1:
   image:
     tag: 6.6.2
   persistence:
