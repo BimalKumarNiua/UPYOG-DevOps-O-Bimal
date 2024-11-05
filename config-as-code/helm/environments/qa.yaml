@@ -425,6 +425,11 @@ billing-service:
 egf-master:
   memory_limits: 512Mi
   heap: "-Xmx256m -Xms256m"
+
+asset-services:
+  memory_limits: 512Mi
+  heap: "-Xmx256m -Xms256m"
+  
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 egov-custom-consumer:
   erp-host: "https://mohali-qa.egovernments.org/"
