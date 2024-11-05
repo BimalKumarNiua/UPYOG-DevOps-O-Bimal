@@ -426,7 +426,7 @@ egf-master:
   memory_limits: 512Mi
   heap: "-Xmx256m -Xms256m"
 
-asset-services:
+kibana-v1:
   memory_limits: 512Mi
   heap: "-Xmx256m -Xms256m"
   
