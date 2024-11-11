@@ -443,6 +443,10 @@ egf-master:
 kibana-v1:
   memory_limits: 512Mi
   heap: "-Xmx256m -Xms256m"
+
+adv-services:
+  memory_limits: 512Mi
+  heap: "-Xmx256m -Xms256m"
   
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 egov-custom-consumer:
