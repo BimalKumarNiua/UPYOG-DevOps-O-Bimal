@@ -447,6 +447,10 @@ kibana-v1:
 adv-services:
   memory_limits: 512Mi
   heap: "-Xmx256m -Xms256m"
+
+sv-services:
+  memory_limits: 512Mi
+  heap: "-Xmx256m -Xms256m"
   
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 egov-custom-consumer:
