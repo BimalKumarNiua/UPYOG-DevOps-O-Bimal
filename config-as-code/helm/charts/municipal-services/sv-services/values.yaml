@@ -75,7 +75,13 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-enc-service
-  {{- if index .Values "global" "tracer-errors-provideexceptionindetails" }}      
+  {{- if index .Values "global" "tracer-errors-provideexceptionindetails" }}
+  - name: TRACER_ERRORS_PROVIDEEXCEPTIONINDETAILS
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: tracer-errors-provideexceptionindetails
+  {{- end }}      
   - name: EGOV_BILLINGSERVICE_HOST
     valueFrom:
       configMapKeyRef:
