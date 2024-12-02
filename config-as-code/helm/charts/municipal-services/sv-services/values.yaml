@@ -70,6 +70,12 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-localization
+  - name: EGOV_ENC_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-enc-service
+  {{- if index .Values "global" "tracer-errors-provideexceptionindetails" }}      
   - name: EGOV_BILLINGSERVICE_HOST
     valueFrom:
       configMapKeyRef:
