@@ -1,33 +1,30 @@
 # Common Labels
 labels:
-  app: "sv-services"
+  app: "apply-workflow"
   group: "rainmaker"
 
 # Ingress Configs
 ingress:
   enabled: true
   zuul: true
-  context: "sv-services"
+  context: "apply-workflow"
 
 # Init Containers Configs
 initContainers:
   dbMigration:
-    enabled: true
-    schemaTable: "sv_services_schema"
-    image:
-      repository: "sv-services-db"
+    enabled: false
 
 # Container Configs
 image:
-  repository: "sv-services"
+  repository: "apply-workflow"
 replicas: "1"
 healthChecks:
   enabled: true
-  livenessProbePath: "/sv-services/health"
-  readinessProbePath: "/sv-services/health"
+  livenessProbePath: "/apply-workflow/health"
+  readinessProbePath: "/apply-workflow/health"
 appType: "java-spring"
 tracing-enabled: true
-heap: "-Xmx384m -Xms256m"
+heap: "-Xmx256m -Xms256m"
 java-args: "-Dspring.profiles.active=monitoring"
 notification-sms-enabled: ""
 employee-allowed-search-params: ""
@@ -40,53 +37,16 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-idgen
-  - name: EGOV_WORKFLOW_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-workflow-v2
-  - name: STATE_LEVEL_TENANT_ID
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: egov-state-level-tenant-id
   - name: EGOV_MDMS_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
-        key: egov-mdms-service
+        key: egov-mdms-host
   - name: EGOV_USER_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
         key: egov-user
-  - name: EGOV_LOCATION_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-location
-  - name: EGOV_LOCALIZATION_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-localization
-  - name: EGOV_ENC_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: egov-enc-service
-  {{- if index .Values "global" "tracer-errors-provideexceptionindetails" }}
-  - name: TRACER_ERRORS_PROVIDEEXCEPTIONINDETAILS
-    valueFrom:
-      configMapKeyRef:
-        name: egov-config
-        key: tracer-errors-provideexceptionindetails
-  {{- end }}      
-  - name: EGOV_BILLINGSERVICE_HOST
-    valueFrom:
-      configMapKeyRef:
-        name: egov-service-host
-        key: billing-service   
   {{- if index .Values "global" "tracer-errors-provideexceptionindetails" }}
   - name: TRACER_ERRORS_PROVIDEEXCEPTIONINDETAILS
     valueFrom:
@@ -94,18 +54,6 @@ env: |
         name: egov-config
         key: tracer-errors-provideexceptionindetails
   {{- end }}
-  - name: SPRING_KAFKA_CONSUMER_GROUP_ID
-    value: egov-sv-services
-  - name: PERSISTER_SAVE_SV_TOPIC
-    value: create-street-vending
-  - name: PERSISTER_UPDATE_SV_TOPIC
-    value: update-street-vending
-  - name: PERSISTER_UPDATE_SV_TOPIC
-    value: init-street-vending
-  - name: SPRING_KAFKA_PRODUCER_KEY_SERIALIZER
-    value: org.apache.kafka.common.serialization.StringSerializer
-  - name: SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER
-    value: org.springframework.kafka.support.serializer.JsonSerializer
   - name: JAVA_ENABLE_DEBUG
     value: "true"
   - name: JAVA_OPTS
@@ -127,8 +75,6 @@ env: |
     value: "false"
   - name: EGOV_IDGEN_ACK_FORMAT
     value: {{ index .Values "egov-idgen-ack-format" | quote }}
-  - name: NOTIFICATION_SMS_ENABLED
-    value: {{ index .Values "notification-sms-enabled" | quote }}
   - name: EGOV_USER_EVENT_NOTIFICATION_ENABLED
     value: "true"
   {{- if index .Values "employee-allowed-search-params" }}
@@ -144,12 +90,6 @@ env: |
       configMapKeyRef:
         name: egov-config
         key: egov-services-fqdn-name
-  - name: EGOV_USR_EVENTS_CREATE_TOPIC
-    value: "persist-user-events-async"
-  - name: EGOV_USR_EVENTS_PAY_LINK
-    value: "citizen/withoutAuth?redirectTo=egov-common/pay?consumerCode=$consumerCode&tenantId=$tenantId&businessService=$businessService"
-  - name: EGOV_USR_EVENTS_PAY_CODE
-    value: "PAY"          
   {{- if index .Values "tracing-enabled" }}
   - name: TRACER_OPENTRACING_ENABLED
     value: "true" 
