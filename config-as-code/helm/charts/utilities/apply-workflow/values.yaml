@@ -13,6 +13,9 @@ ingress:
 initContainers:
   dbMigration:
     enabled: false
+    schemaTable: "apply-workflow_schema"
+    image:
+      repository: "apply-workflow-db"
 
 # Container Configs
 image:
@@ -35,13 +38,23 @@ env: |
   - name: EGOV_IDGEN_HOST
     valueFrom:
       configMapKeyRef:
-        name: egov-service-host
+        name: egov-service
         key: egov-idgen
+  - name: EGOV_WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
+  - name: STATE_LEVEL_TENANT_ID
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: egov-state-level-tenant-id
   - name: EGOV_MDMS_HOST
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
-        key: egov-mdms-host
+        key: egov-mdms-service
   - name: EGOV_USER_HOST
     valueFrom:
       configMapKeyRef:
