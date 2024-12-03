@@ -22,7 +22,7 @@ image:
   repository: "asset-services"
 replicas: "1"
 healthChecks:
-  enabled: false
+  enabled: true
   livenessProbePath: "/asset-services/health"
   readinessProbePath: "/asset-services/health"
 appType: "java-spring"
@@ -64,17 +64,7 @@ env: |
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
-        key: egov-localization
-  #- name: EGOV_CALCULATION_HOST
-  #  valueFrom:
-  #    configMapKeyRef:
-  #      name: egov-service-host
-  #      key: pt-calculator-v2
-  #- name: EGOV_PT-SERVICES-V2_HOST
-  # valueFrom:
-  #    configMapKeyRef:
-  #      name: egov-service-host
-  #      key: pt-services-v2      
+        key: egov-localization    
   {{- if index .Values "global" "tracer-errors-provideexceptionindetails" }}
   - name: TRACER_ERRORS_PROVIDEEXCEPTIONINDETAILS
     valueFrom:
@@ -88,6 +78,10 @@ env: |
     value: save-asset-assetdetails
   - name: PERSISTER_UPDATE_ASSETDETAILS_TOPIC
     value: update-asset-assetdetails
+  - name: PERSISTER_SAVE_ASSETASSIGNMENTDETAILS_TOPIC
+    value: save-asset-assignmentdetails
+  - name: PERSISTER_UPDATE_ASSETASSIGNMENTDETAILS_TOPIC
+    value: update-asset-assignmentdetails
   - name: SPRING_KAFKA_PRODUCER_KEY_SERIALIZER
     value: org.apache.kafka.common.serialization.StringSerializer
   - name: SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER
@@ -118,8 +112,7 @@ env: |
   - name: EGOV_IDGEN_ASSM_FORMAT
     value: {{ index .Values "egov-idgen-assm-format" | quote }} 
   - name: EGOV_IDGEN_PTID_FORMAT
-    value: {{ index .Values "egov-idgen-ptid-format" | quote }}        
-
+    value: {{ index .Values "egov-idgen-ptid-format" | quote }}
   - name: NOTIFICATION_SMS_ENABLED
     value: {{ index .Values "notification-sms-enabled" | quote }}
   - name: EGOV_USER_EVENT_NOTIFICATION_ENABLED
@@ -139,10 +132,10 @@ env: |
         key: egov-services-fqdn-name
   - name: EGOV_USR_EVENTS_CREATE_TOPIC
     value: "persist-user-events-async"
-  #- name: EGOV_USR_EVENTS_PAY_LINK
-  #  value: "citizen/withoutAuth?redirectTo=egov-common/pay?consumerCode=$consumerCode&tenantId=$tenantId&businessService=$businessService"
-  #- name: EGOV_USR_EVENTS_PAY_CODE
-  #  value: "PAY"          
+  - name: EGOV_USR_EVENTS_PAY_LINK
+    value: "citizen/withoutAuth?redirectTo=egov-common/pay?consumerCode=$consumerCode&tenantId=$tenantId&businessService=$businessService"
+  - name: EGOV_USR_EVENTS_PAY_CODE
+    value: "PAY"          
   {{- if index .Values "tracing-enabled" }}
   - name: TRACER_OPENTRACING_ENABLED
     value: "true" 
