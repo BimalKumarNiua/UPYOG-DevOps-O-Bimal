@@ -38,7 +38,7 @@ env: |
   - name: EGOV_IDGEN_HOST
     valueFrom:
       configMapKeyRef:
-        name: egov-service
+        name: egov-service-host
         key: egov-idgen
   - name: EGOV_WORKFLOW_HOST
     valueFrom:
