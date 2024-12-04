@@ -35,6 +35,8 @@ citizen-allowed-search-params: ""
 
 # Additional Container Envs
 env: |
+  - name: SERVER_SERVLET_CONTEXT_PATH
+    value: /apply-workflow
   - name: EGOV_IDGEN_HOST
     valueFrom:
       configMapKeyRef:
