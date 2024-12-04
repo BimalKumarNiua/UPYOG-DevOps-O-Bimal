@@ -39,8 +39,6 @@ jenkins:
       acl: [niua-org*nudmteam-ci] # GitHub team name, Members of the team get access to deployment job
     - name: qa
       acl: [niua-org*nudmteam-qa] 
-    - name: uat
-      acl: [niua-org*nudmteam-uat] 
     
        
   master:
