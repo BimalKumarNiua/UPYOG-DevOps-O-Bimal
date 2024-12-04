@@ -28,7 +28,7 @@ jenkins:
       user:                                 # Add github team. Members of this team gets login access on jenkins
         - niua-org*nudmteam-ci
         - niua-org*nudmteam-qa
-        - niua-org*nudmteam-uat
+       
        
 
   jobBuilder:    # Add jobBuilder repo's, add repo's ssh link
