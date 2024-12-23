@@ -1,30 +1,30 @@
 # Common Labels
 labels:
-  app: "common-module"
+  app: "verification-service"
   group: "rainmaker"
 
 # Ingress Configs
 ingress:
   enabled: true
   zuul: true
-  context: "common-module"
+  context: "verification-service"
 
 # Init Containers Configs
 initContainers:
   dbMigration:
     enabled: true
-    schemaTable: "common_module_schema"
+    schemaTable: "verification_service_schema"
     image:
-      repository: "common-module-db"
+      repository: "verification-service-db"
 
 # Container Configs
 image:
-  repository: "common-module"
+  repository: "verification-service"
 replicas: "1"
 healthChecks:
   enabled: false
-  livenessProbePath: "/common-module/health"
-  readinessProbePath: "/common-module/health"
+  livenessProbePath: "/verification-service/health"
+  readinessProbePath: "/verification-service/health"
 appType: "java-spring"
 tracing-enabled: true
 heap: "-Xmx256m -Xms256m"
@@ -49,7 +49,57 @@ env: |
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
-        key: egov-user  
+        key: egov-user
+  - name: MODULE_HOST_ADVERTISEMENT
+  valueFrom:
+    configMapKeyRef:
+      name: egov-service-host
+      key: adv-services
+  - name: MODULE_HOST_PROPERTY
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: property-services
+  - name: MODULE_HOST_TRADELICENSE
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: tl-services
+  - name: MODULE_HOST_STREETVENDING
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: sv-services
+  - name: MODULE_HOST_PET
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: pet-services
+  - name: MODULE_HOST_EWASTE
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: ewaste-services
+  - name: MODULE_HOST_COMMUNITYHALL
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: chb-services
+  - name: MODULE_HOST_FIRENOC
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: firenoc-services
+  - name: MODULE_HOST_BPA
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: bpa-services
+  - name: MODULE_HOST_SEWERAGE
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: sw-services
   {{- if index .Values "global" "tracer-errors-provideexceptionindetails" }}
   - name: TRACER_ERRORS_PROVIDEEXCEPTIONINDETAILS
     valueFrom:
