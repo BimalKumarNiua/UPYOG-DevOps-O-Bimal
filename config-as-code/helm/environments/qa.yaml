@@ -582,6 +582,10 @@ employee-dashboard:  # Configuration for the employee-dashboard module
 verification-service:  # Configuration for the common search module module
   memory_limits: 512Mi  
   heap: "-Xmx256m -Xms256m"
+
+asset-calculator:  # Configuration for the common search module module
+  memory_limits: 512Mi  
+  heap: "-Xmx256m -Xms256m"
   
 
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
