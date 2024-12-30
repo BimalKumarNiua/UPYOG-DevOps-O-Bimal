@@ -51,10 +51,10 @@ env: |
         name: egov-service-host
         key: egov-user
   - name: MODULE_HOST_ADVERTISEMENT
-  valueFrom:
-    configMapKeyRef:
-      name: egov-service-host
-      key: adv-services
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: adv-services
   - name: MODULE_HOST_PROPERTY
     valueFrom:
       configMapKeyRef:
