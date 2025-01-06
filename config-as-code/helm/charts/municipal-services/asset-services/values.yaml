@@ -55,6 +55,11 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-workflow-v2
+  - name: ASSET_CALCULATOR_SERVICE_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: asset-calculator
   - name: EGOV_USER_HOST
     valueFrom:
       configMapKeyRef:
