@@ -80,6 +80,11 @@ env: |
       configMapKeyRef:
         name: egov-service-host
         key: egov-enc-service
+  - name: WORKFLOW_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: egov-service-host
+        key: egov-workflow-v2
   #- name: EGOV_CALCULATION_HOST
   #  valueFrom:
   #    configMapKeyRef:
