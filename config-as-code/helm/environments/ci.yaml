@@ -24,9 +24,9 @@ jenkins:
     enabled: true
     acl:
       admin:
-        - niua-org*nudmadmin # Add github team. Members of this team gets admin access on jenkins
+        - niua-org*nudmteam # Add github team. Members of this team gets admin access on jenkins
       user:                                 # Add github team. Members of this team gets login access on jenkins
-        - niua-org*nudmteam-ci
+        - niua-org*nudmadmin-ci
         - niua-org*nudmteam-qa
        
        
