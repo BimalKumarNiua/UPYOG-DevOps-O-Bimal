@@ -24,9 +24,9 @@ jenkins:
     enabled: true
     acl:
       admin:
-        - niua-org*nudmteam # Add github team. Members of this team gets admin access on jenkins
+        - niua-org*nudmadmin # Add github team. Members of this team gets admin access on jenkins
       user:                                 # Add github team. Members of this team gets login access on jenkins
-        - niua-org*nudmteam-ci
+        - niua-org*nudmadmin-ci
         - niua-org*nudmteam-qa
        
        
@@ -36,7 +36,7 @@ jenkins:
       'https://github.com/niua-org/UPYOG-NIUA.git'
   deploymentJobs:  # Setup deploymentJobs ACL 
     - name: ci    # deployment job name
-      acl: [niua-org*nudmteam-ci] # GitHub team name, Members of the team get access to deployment job
+      acl: [niua-org*nudmadmin-ci] # GitHub team name, Members of the team get access to deployment job
     - name: qa
       acl: [niua-org*nudmteam-qa] 
     
