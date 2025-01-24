@@ -460,6 +460,10 @@ adv-services:
 sv-services:
   memory_limits: 512Mi
   heap: "-Xmx256m -Xms256m"
+
+vendor-management:
+  memory_limits: 512Mi
+  heap: "-Xmx256m -Xms256m"
   
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 egov-custom-consumer:
