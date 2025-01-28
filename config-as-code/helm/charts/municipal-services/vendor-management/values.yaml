@@ -69,7 +69,17 @@ env: |
     valueFrom:
       configMapKeyRef:
         name: egov-service-host
-        key: egov-localization    
+        key: egov-localization
+  - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: kafka-brokers
+  - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+    valueFrom:
+      configMapKeyRef:
+        name: egov-config
+        key: kafka-brokers
   {{- if index .Values "global" "tracer-errors-provideexceptionindetails" }}
   - name: TRACER_ERRORS_PROVIDEEXCEPTIONINDETAILS
     valueFrom:
@@ -80,9 +90,9 @@ env: |
   - name: SPRING_KAFKA_CONSUMER_GROUP_ID
     value: vendor-management
   - name: PERSISTER_SAVE_VENDOR_TOPIC
-    value: save-vendor
+    value: save-vendor-additional-details
   - name: PERSISTER_UPDATE_VENDOR_TOPIC
-    value: update-vendor
+    value: update-vendor-additional-details
   - name: SPRING_KAFKA_PRODUCER_KEY_SERIALIZER
     value: org.apache.kafka.common.serialization.StringSerializer
   - name: SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER
